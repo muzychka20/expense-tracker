@@ -14,7 +14,7 @@ namespace expense_tracker.Models
 
         public int Amount { get; set; }
 
-        [Column(TypeName = "VARCHAR(75)")]
+        [Column(TypeName = "NVARCHAR(75)")]
         public string? Note { get; set; }
 
         public DateTime Date { get; set; } = DateTime.Now;

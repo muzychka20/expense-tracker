@@ -12,17 +12,18 @@ using expense_tracker.Models;
 namespace expense_tracker.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241015182631_Initial Create")]
+    [Migration("20241016211253_Initial Create")]
     partial class InitialCreate
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "8.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("expense_tracker.Models.Category", b =>
                 {
@@ -30,19 +31,19 @@ namespace expense_tracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategoryId"));
 
                     b.Property<string>("Icon")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(5)");
+                        .HasColumnType("NVARCHAR(5)");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(50)");
+                        .HasColumnType("NVARCHAR(50)");
 
                     b.Property<string>("Type")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(10)");
+                        .HasColumnType("NVARCHAR(10)");
 
                     b.HasKey("CategoryId");
 
@@ -55,7 +56,7 @@ namespace expense_tracker.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
 
                     b.Property<int>("Amount")
                         .HasColumnType("int");
@@ -67,7 +68,7 @@ namespace expense_tracker.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Note")
-                        .HasColumnType("VARCHAR(75)");
+                        .HasColumnType("NVARCHAR(75)");
 
                     b.HasKey("TransactionId");
 

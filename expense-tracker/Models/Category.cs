@@ -8,13 +8,13 @@ namespace expense_tracker.Models
         [Key]
         public int CategoryId { get; set; }
 
-        [Column(TypeName="VARCHAR(50)")]
+        [Column(TypeName="NVARCHAR(50)")]
         public string Title { get; set; }
 
-        [Column(TypeName = "VARCHAR(5)")]
+        [Column(TypeName = "NVARCHAR(5)")]
         public string Icon { get; set; } = "";
 
-        [Column(TypeName = "VARCHAR(10)")]
+        [Column(TypeName = "NVARCHAR(10)")]
         public string Type { get; set; } = "Expense";
     }
 }

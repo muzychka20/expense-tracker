@@ -5,8 +5,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace expense_tracker.Migrations
 {
+    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -15,9 +17,9 @@ namespace expense_tracker.Migrations
                 {
                     CategoryId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "VARCHAR(50)", nullable: false),
-                    Icon = table.Column<string>(type: "VARCHAR(5)", nullable: false),
-                    Type = table.Column<string>(type: "VARCHAR(10)", nullable: false)
+                    Title = table.Column<string>(type: "NVARCHAR(50)", nullable: false),
+                    Icon = table.Column<string>(type: "NVARCHAR(5)", nullable: false),
+                    Type = table.Column<string>(type: "NVARCHAR(10)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -32,7 +34,7 @@ namespace expense_tracker.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<int>(type: "int", nullable: false),
-                    Note = table.Column<string>(type: "VARCHAR(75)", nullable: true),
+                    Note = table.Column<string>(type: "NVARCHAR(75)", nullable: true),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
@@ -52,6 +54,7 @@ namespace expense_tracker.Migrations
                 column: "CategoryId");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
