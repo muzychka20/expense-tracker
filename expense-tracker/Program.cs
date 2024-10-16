@@ -10,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<ApplicationDbContext>(options => 
 options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection")));
 
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("********************");
 
 var app = builder.Build();
 
