@@ -64,7 +64,10 @@ namespace expense_tracker.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
+                if (category.CategoryId == 0)
+                    _context.Add(category);
+                else
+                    _context.Update(category);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

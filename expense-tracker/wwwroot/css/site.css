@@ -29,9 +29,9 @@ body {
     width: 100%;
 }
 
-    .e-btn-group.custom-rbt-group .e-btn {
-        width: 50%;
-    }
+.e-btn-group.custom-rbt-group .e-btn {
+    width: 50%;
+}
 
 .custom-rbt-group label.e-btn {
     box-shadow: none !important;
