@@ -10,7 +10,7 @@ namespace expense_tracker.Models
 
         // CategoryId
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
         public int Amount { get; set; }
 
