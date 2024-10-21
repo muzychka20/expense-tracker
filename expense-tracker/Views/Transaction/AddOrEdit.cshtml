@@ -11,21 +11,20 @@
 				<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 				<input type="hidden" name="TransactionId" value="@Model.TransactionId" />
 				<div class="mb-3">
-					<ejs-datepicker id="date" ejs-for="Date" placeholder="Date" format="MMM-dd-yy" floatLabelType="Always"></ejs-datepicker>
-					<span asp-validation-for="Date" class="text-danger"></span>
+					<ejs-datepicker id="date" ejs-for="Date" placeholder="Date" format="MMM-dd-yy" floatLabelType="Always"></ejs-datepicker>					
 				</div>
 				<div class="mb-3">
 					<ejs-dropdownlist id="ddlCategory" ejs-for="CategoryId" dataSource="@ViewBag.Categories" allowFiltering="true" placeholder="Category" floatLabelType="Always" ignoreAccent="true" filterType="Contains" popupHeight="220px">
 						<e-dropdownlist-fields value="CategoryId" text="TitleWithIcon"></e-dropdownlist-fields>
 					</ejs-dropdownlist>
+					<span asp-validation-for="CategoryId" class="text-danger fs-6"></span>
 				</div>
 				<div class="mb-3">
 					<ejs-numerictextbox id="amount" ejs-for="Amount" placeholder="Amount" floatLabelType="Always" min=0 format="$ ###.##"></ejs-numerictextbox>
-					<span asp-validation-for="Amount" class="text-danger"></span>
+					<span asp-validation-for="Amount" class="text-danger fs-6"></span>
 				</div>
 				<div class="mb-3">
-					<ejs-textbox id="note" placeholder="Note" ejs-for="Note" floatLabelType="Always" multiline=true></ejs-textbox>
-					<span asp-validation-for="Note" class="text-danger"></span>
+					<ejs-textbox id="note" placeholder="Note" ejs-for="Note" floatLabelType="Always" multiline=true></ejs-textbox>					
 				</div>
 				<div class="mb-3">
 					<ejs-button id="submit" type="submit" content="Submit" cssClass="e-success"></ejs-button>
@@ -40,8 +39,9 @@
 	</div>
 </div>
 
-@section Scripts {
+@* @section Scripts {
 	@{
 		await Html.RenderPartialAsync("_ValidationScriptsPartial");
 	}
 }
+ *@
