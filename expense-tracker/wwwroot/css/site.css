@@ -253,71 +253,18 @@ img.profile-pic {
     background-color: #12161d;
     border-right: 1px dashed rgba(75,82,85,0.24);
     padding: 10px 20px;   
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
-    #sidebar #menu {
-        width: 100%;
+    #sidebar #menu {        
         background-color: #12161d;
     }
-
-#sidebar-toggler {
-    padding: 10px;
-    border-radius: 50%;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-    #sidebar-toggler:hover {
-        cursor: pointer;
-        background-color: #48545f14;
-        transform: scale(1.05) translateZ(0px);
-    }
-
-#sidebar.e-close {
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-    #sidebar.e-close .app-logo {
-        display: none;
-    }
-
-    #sidebar.e-close .e-anchor-wrap, #sidebar.e-close .e-menu-item.e-menu-caret-icon {
-        font-size: 0px;
-    }
-
-    #sidebar.e-close .profile-wrapper .titles {
-        display: none !important;
-    }
-
-
-    #sidebar.e-open .e-anchor-wrap,
-    #sidebar.e-close .e-menu-icon, #sidebar.e-open .e-menu-icon {
-        visibility: visible;
-    }
-
-#sidebar.e-open .profile-wrapper .titles, #sidebar.e-open .app-logo {
-    display: flex;
-}
-
-#sidebar.e-sidebar.e-right.e-close {
-    visibility: visible;
-    transform: translateX(0%);
-}
-
-#sidebar.e-open #sidebar-toggler:before {
-    content: '\f100'
-}
-
-#sidebar.e-close #sidebar-toggler:before {
-    content: '\f101'
-}
 
 /*Widget*/
 .widget {
     border-radius: 1rem;
     background-color: #1a222b;
+    width: 100%;
 }
 
     .widget.summary > div:first-child {
@@ -346,3 +293,41 @@ img.profile-pic {
     .widget.chart {
         padding: 5px;
     }
+
+.money-card {
+    width: 32%;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.container {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.card-text {
+    padding: 0 30px
+}
+
+.widgets-row {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+@media (max-width: 1200px) {
+    .card-row {
+        flex-direction: column;
+    }
+    .money-card {
+        width: 100%;
+    }
+
+    .widgets-row {        
+        flex-direction: column;
+    }
+}

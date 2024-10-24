@@ -6,35 +6,35 @@
 }
 
 @*Summary Widgets*@
-<div class="row mb-4">
-	<div class="col-md-4">
-		<div class="d-flex flex-row widget summary income">
+<div class="card-row mb-4">
+	<div class="money-card">
+		<div class="d-flex widget summary income">
 			<div class="d-flex flex-column justify-content-center p-5">
 				<i class="fa fa-dollar-sign fa-2xl"></i>
 			</div>
-			<div class="d-flex flex-column m-auto py-3">
+			<div class="d-flex flex-column m-auto py-3 card-text">
 				<span class="lead">Total Income</span>
 				<h1 class="display-6 fw-bold">@ViewBag.TotalIncome</h1>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="d-flex flex-row widget summary expense">
+	<div class="money-card">
+		<div class="d-flex widget summary expense">
 			<div class="d-flex flex-column justify-content-center p-5">
 				<i class="fa fa-dollar-sign fa-2xl"></i>
 			</div>
-			<div class="d-flex flex-column m-auto py-3">
+			<div class="d-flex flex-column m-auto py-3 card-text">
 				<span class="lead">Total Expense</span>
 				<h1 class="display-6 fw-bold">@ViewBag.TotalExpense</h1>
 			</div>
 		</div>
 	</div>
-	<div class="col-md-4">
-		<div class="d-flex flex-row widget summary balance">
+	<div class="money-card">
+		<div class="d-flex widget summary balance">
 			<div class="d-flex flex-column justify-content-center p-5">
 				<i class="fa fa-dollar-sign fa-2xl"></i>
 			</div>
-			<div class="d-flex flex-column m-auto py-3">
+			<div class="d-flex flex-column m-auto py-3 card-text">
 				<span class="lead">Balance</span>
 				<h1 class="display-6 fw-bold">@ViewBag.Balance</h1>
 			</div>
@@ -42,9 +42,9 @@
 	</div>
 </div>
 
-@*Doughnut and Spline Chart*@
+@*Doughnut and Recents*@
 <div class="row mb-4">
-	<div class="col-md-4">
+	<div class="widgets-row">
 		<div class="widget chart">
 			<div class="p-4">
 				<h5 class="fw-bold">Expense By Category</h5>
@@ -61,54 +61,55 @@
 				</ejs-accumulationchart>
 			</div>
 		</div>
-	</div>
-	<div class="col-md-8">
 		<div class="widget chart">
 			<div class="p-4">
-				<h5 class="fw-bold">Income vs Expense</h5>
-				<ejs-chart id="spline-chart" background="#1a222b" palettes=@(new string[]{"#54ffa9", "#ffe91a"})>
-					<e-chart-primaryxaxis valueType="Category">
-						<e-majorgridlines width="0"></e-majorgridlines>
-						<e-majorticklines width="0"></e-majorticklines>
-					</e-chart-primaryxaxis>
-					<e-chart-primaryyaxis>
-						<e-majorgridlines width="1" color="#32414d" dashline="3,5"></e-majorgridlines>
-						<e-majorticklines width="0"></e-majorticklines>
-						<e-linestyle width="0"></e-linestyle>
-					</e-chart-primaryyaxis>
-					<e-chart-chartarea>
-						<e-chartarea-border width="0"></e-chartarea-border>
-					</e-chart-chartarea>
-					<e-series-collection>
-						<e-series dataSource="@ViewBag.SplinChartData" xName="day" yName="income" name="Income" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline" width="3"></e-series>
-						<e-series dataSource="@ViewBag.SplinChartData" xName="day" yName="expense" name="Expense" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline" width="3"></e-series>
-					</e-series-collection>
-					<e-chart-legendsettings position="Top" alignment="Far" toggleVisibility="false">
-						<e-legendsettings-textstyle color="#fff" size="1rem"></e-legendsettings-textstyle>
-					</e-chart-legendsettings>
-					<e-chart-tooltipsettings enable shared></e-chart-tooltipsettings>
-				</ejs-chart>
+				@*Recent Transactions*@
+				<div class="row">
+					<div class="col-md-12">
+						<div class="widget">
+							<div class="p-4">
+								<h5 class="fw-bold">Recent Transactions</h5>
+							</div>
+							<div class="px-4 pb-4">
+								<ejs-grid id="recent-transactions" dataSource="@ViewBag.RecentTransactions" gridLines="None">
+									<e-grid-columns>
+										<e-grid-column headerText="Category" field="CategoryTitleWithIcon"></e-grid-column>
+										<e-grid-column headerText="Date" field="Date" width="110px" type="date" format="MMM-dd-yy" textAlign="Left"></e-grid-column>
+										<e-grid-column headerText="Amount" field="FormattedAmount" width="110px" textAlign="Right"></e-grid-column>
+									</e-grid-columns>
+								</ejs-grid>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-@*Recent Transactions and More*@
-<div class="row">
-	<div class="col-md-12">
-		<div class="widget">
-			<div class="p-4">
-				<h5 class="fw-bold">Recent Transactions</h5>
-			</div>
-			<div class="px-4 pb-4">
-				<ejs-grid id="recent-transactions" dataSource="@ViewBag.RecentTransactions" gridLines="None">
-					<e-grid-columns>
-						<e-grid-column headerText="Category" field="CategoryTitleWithIcon"></e-grid-column>
-						<e-grid-column headerText="Date" field="Date" width="110px" type="date" format="MMM-dd-yy" textAlign="Left"></e-grid-column>
-						<e-grid-column headerText="Amount" field="FormattedAmount" width="110px" textAlign="Right"></e-grid-column>
-					</e-grid-columns>
-				</ejs-grid>
-			</div>
-		</div>
-	</div>	
+@* Spline Chart *@
+<div class="spline-chart">
+	<h5 class="fw-bold">Income vs Expense</h5>
+	<ejs-chart id="spline-chart" background="#1a222b" palettes=@(new string[]{"#54ffa9", "#ffe91a"})>
+		<e-chart-primaryxaxis valueType="Category">
+			<e-majorgridlines width="0"></e-majorgridlines>
+			<e-majorticklines width="0"></e-majorticklines>
+		</e-chart-primaryxaxis>
+		<e-chart-primaryyaxis>
+			<e-majorgridlines width="1" color="#32414d" dashline="3,5"></e-majorgridlines>
+			<e-majorticklines width="0"></e-majorticklines>
+			<e-linestyle width="0"></e-linestyle>
+		</e-chart-primaryyaxis>
+		<e-chart-chartarea>
+			<e-chartarea-border width="0"></e-chartarea-border>
+		</e-chart-chartarea>
+		<e-series-collection>
+			<e-series dataSource="@ViewBag.SplinChartData" xName="day" yName="income" name="Income" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline" width="3"></e-series>
+			<e-series dataSource="@ViewBag.SplinChartData" xName="day" yName="expense" name="Expense" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline" width="3"></e-series>
+		</e-series-collection>
+		<e-chart-legendsettings position="Top" alignment="Far" toggleVisibility="false">
+			<e-legendsettings-textstyle color="#fff"></e-legendsettings-textstyle>
+		</e-chart-legendsettings>
+		<e-chart-tooltipsettings enable shared></e-chart-tooltipsettings>
+	</ejs-chart>
 </div>
