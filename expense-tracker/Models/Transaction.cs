@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Globalization;
 
 namespace expense_tracker.Models
 {
@@ -30,11 +31,12 @@ namespace expense_tracker.Models
         }
 
 		[NotMapped]
-		public string? FormattedAmount
+		public string FormattedAmount
 		{
 			get
 			{
-				return ((Category == null || Category.Type == "Expense") ? "- " : "+ ") + Amount.ToString("C0");
+				// Format the amount as currency with the dollar sign
+				return ((Category == null || Category.Type == "Expense") ? "- " : "+ ") + Amount.ToString("C0", CultureInfo.CreateSpecificCulture("en-US"));
 			}
 		}
 	}
