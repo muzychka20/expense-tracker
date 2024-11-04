@@ -1,4 +1,5 @@
-﻿using expense_tracker.Models;
+﻿using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using expense_tracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -68,9 +69,10 @@ namespace expense_tracker.Controllers
 				.GroupBy(j => j.Date)
 				.Select(k => new SplineChartData
 				{
-					Day = k.First().Date.ToString("dd-MMM"),
+					Day = k.First().Date.ToString("dd-MMM", CultureInfo.CreateSpecificCulture("en-US")),
+					//Day = k.First().Date.ToString("dd-MMM", CultureInfo.InvariantCulture),
 					Income = k.Sum(l => l.Amount),
-					Expense = 0
+					// Expense = 0
 				})
 				.ToList();
 
@@ -80,30 +82,29 @@ namespace expense_tracker.Controllers
 				.GroupBy(j => j.Date)
 				.Select(k => new SplineChartData
 				{
-					Day = k.First().Date.ToString("dd-MMM"),
-					Income = 0,
+					Day = k.First().Date.ToString("dd-MMM", CultureInfo.CreateSpecificCulture("en-US")),
+					//Day = k.First().Date.ToString("dd-MMM", CultureInfo.InvariantCulture),
 					Expense = k.Sum(l => l.Amount)
 				})
 				.ToList();
 
 			// Days for the last 7 days in "dd-MMM" format
 			string[] Last7Days = Enumerable.Range(0, 7)
-				.Select(i => StartDate.AddDays(i).ToString("dd-MMM"))
-				.ToArray();
+						.Select(i => StartDate.AddDays(i).ToString("dd-MMM", CultureInfo.CreateSpecificCulture("en-US")))
+						.ToArray();
 
 			// Combine Income & Expense data for Spline Chart
 			ViewBag.SplineChartData = from day in Last7Days
-									  join income in IncomeSummary on day equals income.Day into incomeJoined
-									  from income in incomeJoined.DefaultIfEmpty(new SplineChartData { Day = day, Income = 0, Expense = 0 })
+									  join income in IncomeSummary on day equals income.Day into dayIncomeJoined
+									  from income in dayIncomeJoined.DefaultIfEmpty()
 									  join expense in ExpenseSummary on day equals expense.Day into expenseJoined
-									  from expense in expenseJoined.DefaultIfEmpty(new SplineChartData { Day = day, Income = 0, Expense = 0 })
-									  select new SplineChartData
+									  from expense in expenseJoined.DefaultIfEmpty()
+									  select new
 									  {
-										  Day = day,
-										  Income = income.Income,
-										  Expense = expense.Expense
+										  day = day,
+										  income = income == null ? 0 : income.Income,
+										  expense = expense == null ? 0 : expense.Expense,
 									  };
-
 			// Recent Transactions
 			var recentTransactions = await _context.Transactions
 				.Include(j => j.Category)
@@ -115,12 +116,11 @@ namespace expense_tracker.Controllers
 			ViewBag.RecentTransactions = recentTransactions
 				.Select(t => new
 				{
-					Date = t.Date.ToString("MMM-dd-yy", culture), // Format the date as "MMM-dd-yy"
+					Date = t.Date.ToString("MMM-dd-yy", culture),
 					CategoryTitleWithIcon = t.Category.Icon + " " + t.Category.Title,
 					FormattedAmount = String.Format(culture, "{0:C0}", t.Amount) // Format the amount as currency
 				})
 				.ToList();
-
 
 			return View();
 		}

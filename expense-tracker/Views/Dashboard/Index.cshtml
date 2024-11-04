@@ -90,13 +90,14 @@
 @* Spline Chart *@
 <div class="spline-chart">
 	<h5 class="fw-bold">Income vs Expense</h5>
-	<ejs-chart id="spline-chart" background="#1a222b" palettes=@(new string[]{"#54ffa9", "#ffe91a"})>
+	<ejs-chart id="spline-chart" background="#1a222b"
+			   palettes=@(new string[]{"#54ffa9","#ffe91a"})>
 		<e-chart-primaryxaxis valueType="Category">
 			<e-majorgridlines width="0"></e-majorgridlines>
 			<e-majorticklines width="0"></e-majorticklines>
 		</e-chart-primaryxaxis>
 		<e-chart-primaryyaxis>
-			<e-majorgridlines width="1" color="#32414d" dashline="3,5"></e-majorgridlines>
+			<e-majorgridlines width="1" color="#32414d" dashArray="3,5"></e-majorgridlines>
 			<e-majorticklines width="0"></e-majorticklines>
 			<e-linestyle width="0"></e-linestyle>
 		</e-chart-primaryyaxis>
@@ -104,11 +105,21 @@
 			<e-chartarea-border width="0"></e-chartarea-border>
 		</e-chart-chartarea>
 		<e-series-collection>
-			<e-series dataSource="@ViewBag.SplinChartData" xName="day" yName="income" name="Income" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline" width="3"></e-series>
-			<e-series dataSource="@ViewBag.SplinChartData" xName="day" yName="expense" name="Expense" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline" width="3"></e-series>
+			
+			
+			<e-series dataSource="@ViewBag.SplineChartData" xName="day" width="3" yName="income" name="Income" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline">
+			</e-series>
+
+			<e-series dataSource="@ViewBag.SplineChartData" xName="day" width="3" yName="expense" name="Expense" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline">
+			</e-series>
+			
+			@* <e-series name="series1" xName="xValue" yName="yValue" dataSource="ViewBag.dataSource" type="@Syncfusion.EJ2.Charts.ChartSeriesType.Spline">
+			</e-series>	 *@
+
+
 		</e-series-collection>
 		<e-chart-legendsettings position="Top" alignment="Far" toggleVisibility="false">
-			<e-legendsettings-textstyle color="#fff"></e-legendsettings-textstyle>
+			<e-legendsettings-textstyle color="#fff" size="1rem"></e-legendsettings-textstyle>
 		</e-chart-legendsettings>
 		<e-chart-tooltipsettings enable shared></e-chart-tooltipsettings>
 	</ejs-chart>
